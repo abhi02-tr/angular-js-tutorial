@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Directive ng</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <style>
+        input.ng-invalid {
+            background-color: aqua;
+        }
+    </style>
+  </head>
+  <body>
+    <div
+      ng-app="myApp"
+      ng-init="names=['abhi', 123, 'Dhaval']; info=[
+    {name:'Jani',country:'Norway'},
+    {name:'Hege',country:'Sweden'},
+    {name:'Kai',country:'Denmark'}]" 
+      ng-controller="myCtrl"
+    >
+      <ul>
+        <li ng-repeat="x in names">{{x}}</li>
+      </ul>
+
+      <br />
+      <ul>
+        <li ng-repeat="n in info">{{n.name + " " + n.country}}</li>
+      </ul>
+
+      <br />
+      <!-- To check email  validation -->
+      <form action="#" name="myform">
+        email: <input type="email" name="email" ng-model="text" />
+        <span ng-show="myform.email.$error.email" style="color: red"
+          >Not validate</span
+        >
+        <h1>Status</h1>
+        {{myform.email.$valid}} <br>
+        {{myform.email.$dirty}} <br>
+        {{myform.email.$touched}} <br>
+      </form>
+
+      <!-- for changing name -->
+      <h1 ng-click="changeName()">{{firstname}}</h1>
+    </div>
+
+    <script>
+        let app = angular.module('myApp',[]);
+        app.controller('myCtrl', function($scope){
+            $scope.firstname = 'abhi';
+            $scope.changeName = ()=>{
+                $scope.firstname = 'change bhai';
+            };
+        });
+    </script>
+  </body>
+</html>
